@@ -4,12 +4,12 @@ function InputBox({
     selectedCurr,
     onAmountChage,
 }) {
-   
+
 
     return (
-        <div className={`bg-white p-3 rounded-lg text-sm flex `}>
-            <div className="w-1/2">
-                <label  className="text-black/40 mb-2 inline-block">
+        <div className={`bg-white p-3 rounded-lg text-sm flex items-center w-1/3 h-[7vw]`}>
+            <div className="w-3/4">
+                <label className="text-black/40 mb-2 inline-block">
                     {label}
                 </label>
                 <input
@@ -26,9 +26,9 @@ function InputBox({
                     className="rounded-lg px-1 py-1 bg-gray-100 cursor-pointer outline-none"
                     value={selectedCurr}
                 >
-                        <option value="usd">
-                            usd
-                        </option>
+                    <option value="usd">
+                        usd
+                    </option>
                 </select>
             </div>
         </div>
