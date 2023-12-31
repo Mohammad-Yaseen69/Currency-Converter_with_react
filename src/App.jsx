@@ -25,7 +25,7 @@ function App() {
 
 
   return (
-    <div className='w-[60vw] bg-[#FFFFFF99]  border-white border-2 rounded-md h-[60vh] flex flex-col justify-center items-center'>
+    <div className='w-[60vw] backdrop-blur-sm bg-white/30  border-white border-2 rounded-md h-[60vh] flex flex-col justify-center items-center'>
       <InputBox label='from'
         amount={amountStatefor}
         selectedCurr={from}
@@ -40,7 +40,7 @@ function App() {
         }}
       />
 
-      <button onClick={swap} className='bg-blue-600 px-3 py-1 rounded text-white'>SWAP</button>
+      <button onClick={swap} className='bg-red-600 px-3 py-1 rounded text-white'>SWAP</button>
 
       <InputBox label='to'
         inputDisabled
