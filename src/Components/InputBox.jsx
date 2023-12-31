@@ -1,25 +1,33 @@
+import { Input } from "postcss";
+import { useId } from "react";
+import countryList from "../Assets/countryCode";
+
 function InputBox({
     label,
     amount,
     selectedCurr,
-    currencyOptions = [],
-    onCurrencyChage,
-    onAmountChage,
+    onCurrencyChange,
+    inputDisabled = false,
+    onAmountChange,
 }) {
 
+    const inputId = useId()
+    const currencyOptions = Object.keys(countryList)
 
     return (
         <div className={`bg-white p-3 rounded-lg text-sm flex items-center w-3/4 h-[7vw]`}>
             <div className="w-3/4">
-                <label className="text-black/40 mb-2 inline-block">
+                <label htmlFor={inputId} className="text-black/40 mb-2 inline-block">
                     {label}
                 </label>
                 <input
+                    id={inputId}
                     className="outline-none w-full bg-transparent py-1.5"
                     type="number"
                     placeholder="Amount"
                     value={amount}
-                    onChange={(e) => onAmountChage && onAmountChage(Number(e.target.value))}
+                    disabled ={inputDisabled}
+                    onChange={(e) => onAmountChange && onAmountChange(Number(e.target.value))}
                 />
             </div>
             <div className="w-1/2 flex flex-wrap justify-end text-right">
@@ -27,12 +35,13 @@ function InputBox({
                 <select
                     className="rounded-lg px-1 py-1 bg-gray-100 cursor-pointer outline-none"
                     value={selectedCurr}
-                    onChange={(e) => onCurrencyChage && onCurrencyChage(e.target.value)}
+                    onChange={(e) => onCurrencyChange && onCurrencyChange(e.target.value)}
                 >
-                    {currencyOptions.map(curr =>
-                    (<option key={curr} value={curr}>
-                        {curr}
-                    </option>))}
+                    {currencyOptions.map(curr => (
+                        <option key={curr} value={curr}>
+                            {curr}
+                        </option>
+                    ))}
                 </select>
             </div>
         </div>

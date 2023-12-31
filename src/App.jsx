@@ -5,18 +5,54 @@ import InputBox from './Components/InputBox.jsx'
 function App() {
   const [amountStateto, setAmountto] = useState(0)
   const [amountStatefor, setAmountfor] = useState(0)
-  useCurrency('usd').then(data => console.log(data.irr))
+  const [from, setfrom] = useState('USD')
+  const [to, setTo] = useState('PKR')
+
+  const data = useCurrency(from.toLowerCase())
+  const convert = () => {
+    const exchangeRate = data[to.toLowerCase()] * amountStatefor
+    setAmountto(exchangeRate.toFixed(2))
+  }
+
+
+  const swap = () => {
+    setfrom(to)
+    setTo(from)
+    setAmountfor(amountStateto)
+    setAmountto(amountStatefor)
+  }
+
+
 
   return (
     <div className='w-[60vw] bg-[#FFFFFF99]  border-white border-2 rounded-md h-[60vh] flex flex-col justify-center items-center'>
-      <InputBox label='for' amount={amountStatefor} selectedCurr='usd' onAmountChage={(e) => setAmountfor(e)
-      } />
+      <InputBox label='from'
+        amount={amountStatefor}
+        selectedCurr={from}
+        onAmountChange={(e) => {
+          const amount = parseFloat(e);
+          setAmountfor(isNaN(amount) ? 0 : amount);
+        }}
+        onCurrencyChange={(currency) => {
+          setfrom(currency)
+          setAmountfor(0)
+          setAmountto(0)
+        }}
+      />
 
-      <button className='bg-blue-600 px-3 py-1 rounded text-white'>SWAP</button>
+      <button onClick={swap} className='bg-blue-600 px-3 py-1 rounded text-white'>SWAP</button>
 
-      <InputBox label='to' amount={amountStateto} selectedCurr='pkr' onAmountChage={(e) => setAmountto(e)} />
+      <InputBox label='to'
+        inputDisabled
+        amount={amountStateto}
+        selectedCurr={to}
+        onCurrencyChange={(currency) => {
+          setTo(currency)
+          setAmountfor(0)
+          setAmountto(0)
+        }} />
 
-      <button className='bg-blue-900 mt-7 text-white py-2 px-10 rounded'>Convert</button>
+      <button onClick={convert} className='bg-blue-900 mt-7 text-white py-2 px-10 rounded'>Convert {from} to {to}</button>
     </div>
   )
 }
