@@ -4,4 +4,11 @@
 
 body{
     background-color: rgba(0, 0, 0, 0.897);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url('https://i.pinimg.com/originals/e5/74/01/e57401f1d70820db2bab1b05a1236993.jpg');
+    background-position: center;
+    background-size: cover;
 }
